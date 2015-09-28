@@ -36,7 +36,9 @@ q=name:"季度"~1 AND type:Q&fq=tgsType:2&start=0&rows=5&sort=name+desc,code+asc
 ##2.定义实体类:
 eg:如下定义了一个实体类Student：
 
-    @Document(index = "school", type = "student", settings = "school-settings.json")
+    //@Document(index = "school", type = "student", settings = "school-settings.json")
+    //OR
+    @Document(index = "school", type = "student", replicas = 1, shards = 5)
     public class Student {
         @ID
         String id;
