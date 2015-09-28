@@ -9,7 +9,9 @@ import org.cnfire.elasticsearch.data.FieldType;
 /**
  * Created by jack.zhu on 15-9-22.
  */
-@Document(index = "school", type = "student", settings = "school-settings.json")
+//@Document(index = "school", type = "student", settings = "school-settings.json")
+//OR
+@Document(index = "school", type = "student", replicas = 1, shards = 5)
 public class Student {
     @ID
     String id;

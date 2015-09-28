@@ -174,4 +174,6 @@ eg:
 
 ok,当你运行程序时候，系统会自动检测elasticsearch中相关的index和type/mapping是否存在，如果不存在则会根据注解自动创建
 
+更详细的使用请参考项目中的test
+
 **注：**本系统所提供的查询相关API暂只能使用标准的Lucene查询语法，比如你要显示地使用match_all,term等，其实都可以通过标准的Lucene语法进行查询
