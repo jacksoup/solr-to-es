@@ -21,7 +21,7 @@ q=name:"季度"~1 AND type:Q&fq=tgsType:2&start=0&rows=5&sort=name+desc,code+asc
 
 **1.进行相关环境设置：**
 请在你的classpath目录新建elasticsearch.properties文件，内容参考如下：
-...
+***
 //elasticsearch集群名称
 cluster.name = es_nrs_log
 //elasticsearch集群中的主机地址列表（多个主机，以","分隔）
@@ -32,7 +32,7 @@ client.port = 9300
 isCheck = true
 //设置实体类所在的包路径
 models.package.dir = org.cnfire.elasticsearch.model
-...
+***
 
 **2.定义实体类:**
 eg:
