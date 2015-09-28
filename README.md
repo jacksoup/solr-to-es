@@ -19,21 +19,20 @@ q=name:"季度"~1 AND type:Q&fq=tgsType:2&start=0&rows=5&sort=name+desc,code+asc
 #如何使用
 
 
-**1.进行相关环境设置：**    
-请在你的classpath目录新建elasticsearch.properties文件，内容参考如下： 
-
-> elasticsearch集群名称  
-> cluster.name = es_nrs_log  
-> elasticsearch集群中的主机地址列表（多个主机，以","分隔）      
-> hosts = 183.136.163.88,183.136.162.194,183.136.162.71      
-> elasticsearch客户端连接端口号（默认9300）      
-> client.port = 9300      
-> 每次运行前是否进行检测（检测相关的索引和type/mapping是否存在，不存在则根据实体类的注解自动生成）
-> 第一次运行可以设置为true,以后更改为false    
-> isCheck = true    
-> 设置实体类所在的包路径    
-> models.package.dir = org.cnfire.elasticsearch.model
-
+**1.进行相关环境设置：**
+请在你的classpath目录新建elasticsearch.properties文件，内容参考如下：
+...
+//elasticsearch集群名称
+cluster.name = es_nrs_log
+//elasticsearch集群中的主机地址列表（多个主机，以","分隔）
+hosts = 183.136.163.88,183.136.162.194,183.136.162.71
+//elasticsearch客户端连接端口号（默认9300）
+client.port = 9300
+//每次运行前是否进行检测（检测相关的索引和type/mapping是否存在，不存在则根据实体类的注解自动生成）
+isCheck = true
+//设置实体类所在的包路径
+models.package.dir = org.cnfire.elasticsearch.model
+...
 
 **2.定义实体类:**
 eg:
@@ -57,10 +56,10 @@ eg:
 
     相关的setter和getter省略
 
-现在，你已经定义了一个实体类，其描述的索引为school，相应应的type为student 
- 
+现在，你已经定义了一个实体类，其描述的索引为school，相应应的type为student
+
 **注：**相关注解的详细配置参考说明，会在接下来的时间里提供说明文档
-3.现在你可以进行相关操作了，参考如下：  
+3.现在你可以进行相关操作了，参考如下：
 
     public class TestAccessor {
         Class<Student> clazz = Student.class;
