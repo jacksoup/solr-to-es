@@ -1,0 +1,99 @@
+package org.shms.elasticsearch.examples;
+
+import org.shms.elasticsearch.accessor.base.IAccessor;
+import org.shms.elasticsearch.model.MTest;
+import org.shms.elasticsearch.util.Beans;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by jack.zhu on 15-9-21.
+ */
+public class Example {
+    Class<MTest> clazz = MTest.class;;
+    IAccessor accessor = Beans.getAccessor();
+
+    /*添加单个对象*/
+    public void testAdd(){
+        MTest model = new MTest();
+        model.setLogicId("99999999999");
+        model.setName("东方财富集团增持股份通告");
+        model.setPinyin("HZMTLQNQ");
+        model.setTgsType("4");
+        model.setKey("4:1000521938");
+        model.setTypeCode("001006007");
+        model.setTypeName("牛熊证");
+        model.setUrl("EM://quoteloader?view=quotestockview&type=trend&****");
+        model.setOrderNumber("67587.HK");
+        model.setFileName("61");
+        model.setFuncType("006");
+        model.setSecuFullCode("secuFullCode");
+        model.setUrl1("");
+        accessor.add(model);
+    }
+
+    /*添加对象集合*/
+    public void testAddList(){
+        MTest model1 = new MTest();
+        model1.setLogicId("99999999999");
+        MTest model2 = new MTest();
+        model2.setLogicId("88888888888");
+        MTest model3 = new MTest();
+        model3.setLogicId("777777777777");
+        List<MTest> list= new ArrayList<MTest>();
+        list.add(model1);
+        list.add(model2);
+        list.add(model3);
+        accessor.add(list);
+    }
+
+    /*根据ID获取对象*/
+    public void testGet(){
+        accessor.get(clazz,"99999999999");
+    }
+
+    /*根据ID删除对象*/
+    public void testdeleteById(){
+        accessor.delete("AU9j-6ZT2pXKac8HoBvo",clazz);
+    }
+
+    /*全局搜索*/
+    public void testSearch(){
+//        String params = "name:\"恒指摩通六七牛Q\"&start=0&rows=3";
+//        String params = "name:\"A\"~20^10 OR alias:\"A\"~20^50  OR name:*A* OR pinyin:\"A\"~0 OR secuFullCode:\"A\"~0 OR topicIndicator:\"A\"~1\n&start=0&rows=3";
+//        String params = "name:'恒指瑞信' NOT pinyin:'HZRXLWNE'&start=0&rows=5";
+//        String params = "(name:\"A\"~20^10 OR alias:\"A\"~20^50  OR name:*A* OR pinyin:\"A\"~0 OR secuFullCode:\"A\"~0 OR topicIndicator:\"A\"~1)  AND (funcType:003 OR funcType:004 OR funcType:005)";
+//        String params = "name:\"新华网海南\"~1";
+//        String params = "q=name:季度&fq=tgsType:2&start=0&rows=5&sort=name+desc,code+asc&fl=name,code,logicId,pinyin&hl=true&hl.fl=name,code" +
+//                "&hl.simple.pre=<em>&hl.simple.post=</em>";
+        String params = "q=name:'方财'";
+        List<MTest> list = accessor.search(clazz,params);
+        for (MTest model : list){
+            System.out.println(model);
+        }
+    }
+
+    /*获取搜索记录个数*/
+    public void testCount(){
+        String params = "q=name:*";
+        System.out.println(accessor.count(clazz,params));
+    }
+
+    /*根据搜索条件删除相应数据*/
+    public void deleteAll(){
+        String params = "q=name:*";//如果按照id:*无法删除数据
+        System.out.println(accessor.delete(clazz,params));
+    }
+
+    public static void main(String[] args) {
+        Example example = new Example();
+//        long start = System.currentTimeMillis();
+//        example.testSearch();
+//        long end = System.currentTimeMillis();
+//        System.err.println("time:" + (end -start) );
+        example.testdeleteById();
+
+    }
+
+}

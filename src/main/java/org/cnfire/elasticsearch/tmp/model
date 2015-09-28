@@ -1,0 +1,437 @@
+package org.shms.elasticsearch.model;
+import org.shms.elasticsearch.annotations.Document;
+import org.shms.elasticsearch.annotations.ESAnnotation;
+
+/**
+ * Created by jack zhu on 15-8-21.
+ */
+/*ElasticSearch全局搜索实体类*/
+@ESAnnotation.Index(name = "nrs")
+@ESAnnotation.Type(name = "global" ,init = true)
+public class MTest {
+    @ESAnnotation.Field(type = "string", index = "analyzed", stored = "true", analyzer = "keyword")
+    private String id;
+    @ESAnnotation.Field
+    private String logicId;     //记录主键
+    @ESAnnotation.Field
+    private String code;      //分类代码
+    @ESAnnotation.Field(analyzer = "ik")
+    private String name;      //分类名称
+    @ESAnnotation.Field
+    private String parentCode;      //父分类代码
+    @ESAnnotation.Field(analyzer = "pinyin_analyzer")
+    private String pinyin;      //分类拼音
+    @ESAnnotation.Field
+    private String tgsType;      //存储大类
+    @ESAnnotation.Field
+    private String key;              //tgsType:[branch|leaf|fileName]?code
+    @ESAnnotation.Field
+    private String typeCode;      //专题的分类code
+    @ESAnnotation.Field(analyzer = "ik")
+    private String typeName;      //专题的分类name
+    @ESAnnotation.Field
+    private String path;       //专题在终端中的位置
+    @ESAnnotation.Field
+    private String url;         //链接地址
+    @ESAnnotation.Field
+    private String remark;     //备注
+    @ESAnnotation.Field
+    private String orderNumber;    //序号
+    @ESAnnotation.Field
+    private String fileName;     //同大类下分类
+    @ESAnnotation.Field
+    private String funcType;    //功能分类，截取自typeCode的第4~6位
+    @ESAnnotation.Field
+    private String curveType;  //到期，即期，远期
+    @ESAnnotation.Field
+    private String biaoZhun;
+    @ESAnnotation.Field
+    private String categoryCode;
+    @ESAnnotation.Field(analyzer = "ik_analyzer")
+    private String categoryName;
+    @ESAnnotation.Field(analyzer = "douhao_analyzer")
+    private String parameters;
+    @ESAnnotation.Field
+    private String pathCode;   //路径编码
+    @ESAnnotation.Field
+    private String shortcut;
+    @ESAnnotation.Field(analyzer = "pinyin_analyzer")
+    private String secuFullCode;
+    @ESAnnotation.Field
+    private String url1;
+    @ESAnnotation.Field(analyzer = "ik_analyzer")
+    private String topicIndicator;
+    @ESAnnotation.Field(analyzer = "fenhao_analyzer")
+    private String alias;     //别名
+    @ESAnnotation.Field
+    private String isDc;
+    @ESAnnotation.Field
+    private String isPCode; //是否是树节点，目录为1，非目录为0，用于edb
+    @ESAnnotation.Field
+    private String updateFreq;  //更新频率，用于edb
+    @ESAnnotation.Field
+    private String unit;    //单位，用于edb
+    @ESAnnotation.Field(analyzer = "ik")
+    private String source;  //来源，用于edb
+    @ESAnnotation.Field
+    private String region;  //区域
+    @ESAnnotation.Field
+    private String startDate;   //开始日期
+    @ESAnnotation.Field
+    private String endDate; //结束日期
+    @ESAnnotation.Field
+    private String gxDate;  //更新日期
+    @ESAnnotation.Field(analyzer = "ik")
+    private String text;
+    @ESAnnotation.Field
+    private String score;
+//    private String secuFullCodeHighlight;   //高亮的证券代码
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLogicId() {
+        return logicId;
+    }
+
+    public void setLogicId(String logicId) {
+        this.logicId = logicId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getParentCode() {
+        return parentCode;
+    }
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
+    }
+
+    public String getTgsType() {
+        return tgsType;
+    }
+
+    public void setTgsType(String tgsType) {
+        this.tgsType = tgsType;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFuncType() {
+        return funcType;
+    }
+
+    public void setFuncType(String funcType) {
+        this.funcType = funcType;
+    }
+
+    public String getCurveType() {
+        return curveType;
+    }
+
+    public void setCurveType(String curveType) {
+        this.curveType = curveType;
+    }
+
+    public String getBiaoZhun() {
+        return biaoZhun;
+    }
+
+    public void setBiaoZhun(String biaoZhun) {
+        this.biaoZhun = biaoZhun;
+    }
+
+    public String getCategoryCode() {
+        return categoryCode;
+    }
+
+    public void setCategoryCode(String categoryCode) {
+        this.categoryCode = categoryCode;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(String parameters) {
+        this.parameters = parameters;
+    }
+
+    public String getPathCode() {
+        return pathCode;
+    }
+
+    public void setPathCode(String pathCode) {
+        this.pathCode = pathCode;
+    }
+
+    public String getShortcut() {
+        return shortcut;
+    }
+
+    public void setShortcut(String shortcut) {
+        this.shortcut = shortcut;
+    }
+
+    public String getSecuFullCode() {
+        return secuFullCode;
+    }
+
+    public void setSecuFullCode(String secuFullCode) {
+        this.secuFullCode = secuFullCode;
+    }
+
+    public String getUrl1() {
+        return url1;
+    }
+
+    public void setUrl1(String url1) {
+        this.url1 = url1;
+    }
+
+    public String getTopicIndicator() {
+        return topicIndicator;
+    }
+
+    public void setTopicIndicator(String topicIndicator) {
+        this.topicIndicator = topicIndicator;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getIsDc() {
+        return isDc;
+    }
+
+    public void setIsDc(String isDc) {
+        this.isDc = isDc;
+    }
+
+    public String getIsPCode() {
+        return isPCode;
+    }
+
+    public void setIsPCode(String isPCode) {
+        this.isPCode = isPCode;
+    }
+
+    public String getUpdateFreq() {
+        return updateFreq;
+    }
+
+    public void setUpdateFreq(String updateFreq) {
+        this.updateFreq = updateFreq;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getGxDate() {
+        return gxDate;
+    }
+
+    public void setGxDate(String gxDate) {
+        this.gxDate = gxDate;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "global{" +
+                "id='" + id + '\'' +
+                ", logicId='" + logicId + '\'' +
+                ", code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", parentCode='" + parentCode + '\'' +
+                ", pinyin='" + pinyin + '\'' +
+                ", tgsType='" + tgsType + '\'' +
+                ", key='" + key + '\'' +
+                ", typeCode='" + typeCode + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", path='" + path + '\'' +
+                ", url='" + url + '\'' +
+                ", remark='" + remark + '\'' +
+                ", orderNumber='" + orderNumber + '\'' +
+                ", fileName='" + fileName + '\'' +
+                ", funcType='" + funcType + '\'' +
+                ", curveType='" + curveType + '\'' +
+                ", biaoZhun='" + biaoZhun + '\'' +
+                ", categoryCode='" + categoryCode + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", parameters='" + parameters + '\'' +
+                ", pathCode='" + pathCode + '\'' +
+                ", shortcut='" + shortcut + '\'' +
+                ", secuFullCode='" + secuFullCode + '\'' +
+                ", url1='" + url1 + '\'' +
+                ", topicIndicator='" + topicIndicator + '\'' +
+                ", alias='" + alias + '\'' +
+                ", isDc='" + isDc + '\'' +
+                ", isPCode='" + isPCode + '\'' +
+                ", updateFreq='" + updateFreq + '\'' +
+                ", unit='" + unit + '\'' +
+                ", source='" + source + '\'' +
+                ", region='" + region + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", gxDate='" + gxDate + '\'' +
+                ", text='" + text + '\'' +
+                ", score='" + score + '\'' +
+                '}';
+    }
+}

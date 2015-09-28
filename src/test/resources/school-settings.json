@@ -1,0 +1,29 @@
+{
+    "index": {
+        "number_of_replicas": "1",
+        "number_of_shards": "5",
+        "analysis": {
+            "analyzer": {
+                "ik": {
+                    "type": "org.elasticsearch.index.analysis.IkAnalyzerProvider",
+                    "alias": ["ik_analyzer"]
+                },
+                "douhao_analyzer": {
+                    "type": "pattern",
+                    "pattern": ",",
+                    "alias": ["douhao"]
+                },
+                "fenhao_analyzer": {
+                    "type": "pattern",
+                    "pattern": ";",
+                    "alias": ["fenhao"]
+                },
+                "pinyin_analyzer": {
+                    "type": "pattern",
+                    "pattern": "\\w",
+                    "alias": ["pinyin"]
+                }
+            }
+        }
+    }
+}
