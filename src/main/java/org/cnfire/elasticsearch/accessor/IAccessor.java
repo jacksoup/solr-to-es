@@ -3,7 +3,7 @@ package org.cnfire.elasticsearch.accessor;
 import java.util.List;
 
 /**
- * Created by jack zhu on 15-8-21.
+ * Created by caesar.zhu on 15-8-21.
  * 和ElasticSearch进行交互的底层接口，包括对索引、映射、类型、以及具体记录数据的添加、更新、删除、查询、搜索等操作
  * 目前有两个实现类：
  * (1).AccessorClientImpl: 通过es自带的TransportClient客户端提供的API进行操作

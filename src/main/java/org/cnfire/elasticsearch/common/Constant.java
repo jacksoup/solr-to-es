@@ -1,7 +1,7 @@
 package org.cnfire.elasticsearch.common;
 
 /**
- * Created by jack zhu on 15-8-21.
+ * Created by caesar zhu on 15-8-21.
  * ElasticSearch相关的常量类
  *
  * 由common.properties中的参数进行初始化

@@ -1,7 +1,7 @@
 package org.cnfire.elasticsearch.common;
 
 /**
- * Created by jack.zhu on 15-9-14.
+ * Created by caesar.zhu on 15-9-14.
  */
 public class ParamsParseException extends Exception{
     /*序列化ID*/

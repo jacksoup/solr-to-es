@@ -5,7 +5,7 @@
 q=name:"季度"~1 AND type:Q&fq=tgsType:2&start=0&rows=5&sort=name+desc,code+asc&fl=name,code,logicId,pinyin&hl=true&hl.fl=name,code
 &hl.simple.pre=<em>&hl.simple.post=</em>
 ```
-由于本人所在的公司的搜索业务由solr升级到elasticsearch，为了实现兼容现有搜索业务层，故该开发了这个工具。
+由于本人所在的公司的搜索业务由solr升级到elasticsearch，为了实现兼容现有搜索业务层，故该开发这个工具。
 
 #工具特点
 - 基于注解自动创建index、type，省去了手动配置操作

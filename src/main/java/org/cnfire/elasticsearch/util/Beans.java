@@ -5,7 +5,7 @@ import org.cnfire.elasticsearch.accessor.IAccessor;
 import org.cnfire.elasticsearch.common.Init;
 
 /**
- * Created by jack.zhu on 15-9-22.
+ * Created by caesar.zhu on 15-9-22.
  */
 public class Beans {
     static { new Init(); }//调用初始化类

@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * Created by jack zhu on 15-8-21.
+ * Created by caesar.zhu on 15-8-21.
  * ElasticSearch相关的工具类，主要通过反射技术进行相关操作并获取相关类信息。
  * 功能包括：
  * 获取实体类的索引名称、获取实体类的类型名称、将ES实体类对象转换成Json对象、将Map对象转换为ES实体类对象、

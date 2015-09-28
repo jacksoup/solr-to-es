@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Created by jack.zhu on 15-9-22.
+ * Created by caesar.zhu on 15-9-22.
  */
 
 /*初始化主类，执行相关初始化操作*/

@@ -13,7 +13,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /**
- * Created by jack zhu on 15-8-21.
+ * Created by caesar.zhu on 15-8-21.
  * Class操作的工具类，主要用于包扫描获取相关的class
  */
 public class ClassUtil {

@@ -6,7 +6,7 @@ import org.cnfire.elasticsearch.data.FieldType;
 import java.lang.annotation.*;
 
 /**
- * Created by jack.zhu on 15-9-22.
+ * Created by caesar.zhu on 15-9-22.
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

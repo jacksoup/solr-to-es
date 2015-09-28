@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by jack zhu on 15-8-25.
+ * Created by caesar.zhu on 15-8-25.
  */
 public class WebUtil {
     private static Logger LOG = LoggerFactory.getLogger(WebUtil.class);

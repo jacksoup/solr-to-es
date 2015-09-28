@@ -10,7 +10,7 @@ import org.cnfire.elasticsearch.data.FieldType;
  * Created by jack.zhu on 15-9-22.
  */
 @Document(index = "school", type = "student", settings = "school-settings.json")
-public class Model {
+public class Student {
     @ID
     String id;
     @Field(type = FieldType.String, index = FieldIndex.analyzed, stored = true, analyzer = "ik")

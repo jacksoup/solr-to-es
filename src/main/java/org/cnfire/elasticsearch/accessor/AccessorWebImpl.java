@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by jack zhu on 15-8-25.
+ * Created by caesar.zhu on 15-8-25.
  * IAccessor的基于es restful web API(通过web方式进行操作)的实现类
  */
 public class AccessorWebImpl implements IAccessor {

@@ -6,7 +6,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 
 /**
- * Created by jack zhu on 15-8-20.
+ * Created by caesar.zhu on 15-8-20.
  * ElasticSearch的Client工厂类
  * 目前，只有一个实现，即使用TransportClient对象
  */

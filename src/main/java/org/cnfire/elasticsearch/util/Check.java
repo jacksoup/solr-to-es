@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by jack zhu on 15-8-24.
+ * Created by caesar.zhu on 15-8-24.
  * 系统的初始化工具类，包括重建和检测相关索引及映射
  */
 public class Check {
