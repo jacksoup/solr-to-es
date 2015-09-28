@@ -473,7 +473,7 @@ public class AccessorClientImpl implements IAccessor {
         MappingMetaData mappingMetaData = clusterStateResponse.getState().getMetaData().index(indexName).getMappings().get(typeName);
 //        ImmutableMap<String,MappingMetaData> indexMappings = clusterStateResponse.getState().getMetaData().index(indexName).getMappings();
         boolean mappingExists = mappingMetaData != null ? true : false;
-        LOG.info("存在性检测====>" + (mappingExists ? "mapping\"" + indexName + "\"/" + typeName + "存在" : "mapping：" + indexName + "/" + typeName + "不存在！"));
+        LOG.info("存在性检测====>" + (mappingExists ? "mapping \"" + indexName + "/" + typeName + "\"存在" : "mapping：" + indexName + "/" + typeName + "不存在！"));
         return mappingExists;
     }
 

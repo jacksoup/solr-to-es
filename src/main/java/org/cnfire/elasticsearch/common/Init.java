@@ -5,6 +5,8 @@ import org.cnfire.elasticsearch.util.Check;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 
 /**
@@ -46,11 +48,11 @@ public class Init {
         Constant.ROWS = Integer.parseInt(prop.getProperty("rows","10"));
         Constant.CLIENT_PORT = Integer.parseInt(prop.getProperty("client.port","9300").trim());
         Constant.WEB_PORT = Integer.parseInt(prop.getProperty("web.port","9200").trim());
-        Constant.HOST = prop.getProperty("hosts","localhost").trim();
-        Constant.MODELS_PACKAGE = prop.getProperty("models.package").trim();
+        Constant.HOSTS = Arrays.asList(prop.getProperty("hosts","localhost").trim().split(","));
+        Constant.MODELS_PACKAGE = prop.getProperty("models.package.dir").trim();
         Constant.HIGHLIGHT_PRE_TAGS = prop.getProperty("highlight.pre.tags","<span style=\"color:red\"").trim();
         Constant.HIGHLIGHT_POST_TAGS = prop.getProperty("highlight.post.tags","</span>").trim();
-        Constant.BASE_URL = "http://" + Constant.HOST + ":" + Constant.WEB_PORT + "/";
+        Constant.BASE_URL = "http://" + Constant.HOSTS.get(0) + ":" + Constant.WEB_PORT + "/";
 
         Preconditions.checkNotNull(Constant.MODELS_PACKAGE, "请设置实体类所在的包路径（models.package）！");
 

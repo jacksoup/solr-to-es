@@ -1,4 +1,4 @@
-package model;
+package org.xxx.model;
 
 import org.cnfire.elasticsearch.annotations.Document;
 import org.cnfire.elasticsearch.annotations.Field;

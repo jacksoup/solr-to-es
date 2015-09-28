@@ -1,7 +1,7 @@
 import org.cnfire.elasticsearch.accessor.IAccessor;
-import model.Student;
 import org.cnfire.elasticsearch.util.Beans;
 import org.testng.annotations.Test;
+import org.xxx.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,7 +122,7 @@ public class TestAccessor {
     /*根据实体类*/
     public static void main(String[] args) {
         TestAccessor example = new TestAccessor();
-        example.add();
+//        example.add();
 //        example.get();
 //        example.count();
         example.search();

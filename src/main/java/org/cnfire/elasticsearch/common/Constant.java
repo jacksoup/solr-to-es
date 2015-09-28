@@ -1,5 +1,7 @@
 package org.cnfire.elasticsearch.common;
 
+import java.util.List;
+
 /**
  * Created by caesar zhu on 15-8-21.
  * ElasticSearch相关的常量类
@@ -13,7 +15,7 @@ public class Constant {
     public static boolean IS_CHECK;
     public static int START;//搜索默认开始位置
     public static int ROWS;//搜索结果条数
-    public static String HOST;//服务器地址
+    public static List<String> HOSTS;//服务器地址
     public static int CLIENT_PORT;//client端口号
     public static int WEB_PORT;//web端口号
     public static String BASE_URL;

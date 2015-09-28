@@ -15,8 +15,12 @@
             <fileNamePattern>logs/elasticsearch.log.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
     </appender>
-    <root level="info">
+    <root level="INFO">
         <appender-ref ref="consoleAppender" />
         <appender-ref ref="fileAppender" />
     </root>
+
+    <logger name="org.elasticsearch">
+        <level value="ERROR"/>
+    </logger>
 </configuration>
