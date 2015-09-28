@@ -17,7 +17,7 @@ public class Example {
         model.setSex("male");
         model.setScore(99.5);
         model.setIsGraduated(true);
-        model.setDescription("jack is a good boy");
+        model.setDescription("jack is a good boy...");
         accessor.add(model);
     }
 
