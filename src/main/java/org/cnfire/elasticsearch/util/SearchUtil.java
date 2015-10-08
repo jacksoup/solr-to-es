@@ -48,6 +48,7 @@ public class SearchUtil {
 //        return indexName;
 
         // OR
+        //笨拙的写法
 //        Annotation[] annotationArr = clazz.getAnnotations();
 //        String indexName = null;
 //        for (Annotation annotation : annotationArr){
