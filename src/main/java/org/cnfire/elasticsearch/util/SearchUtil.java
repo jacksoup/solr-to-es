@@ -2,8 +2,8 @@ package org.cnfire.elasticsearch.util;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Sets;
 import org.cnfire.elasticsearch.annotations.Document;
-import org.cnfire.elasticsearch.annotations.Field;
 import org.cnfire.elasticsearch.annotations.ID;
 import org.cnfire.elasticsearch.common.Constant;
 import org.elasticsearch.search.sort.SortOrder;
@@ -37,15 +37,26 @@ public class SearchUtil {
 
     /*获取指定实体类的索引名称*/
     public static String getIndexName(Class clazz){
-        Annotation[] annotationArr = clazz.getAnnotations();
-        String indexName = null;
-        for (Annotation annotation : annotationArr){
-            if (annotation instanceof Document) {
-                indexName = ((Document) annotation).index();
-                break;
-            }
-        }
-        return indexName;
+        return ((Document) clazz.getAnnotation(Document.class)).index();
+
+//        String indexName = null;
+        //如果一个注解指定类型是存在于此元素上方法返回true，否则返回false
+//        if(clazz.isAnnotationPresent(Document.class)) {
+//            Document ann = (Document) clazz.getAnnotation(Document.class);
+//            indexName = ann.index();
+//        }
+//        return indexName;
+
+        // OR
+//        Annotation[] annotationArr = clazz.getAnnotations();
+//        String indexName = null;
+//        for (Annotation annotation : annotationArr){
+//            if (annotation instanceof Document) {
+//                indexName = ((Document) annotation).index();
+//                break;
+//            }
+//        }
+//        return indexName;
     }
 
     /*获取指定实体类的类型名称*/
@@ -55,46 +66,23 @@ public class SearchUtil {
 
     /*获取指定实体类的类型名称*/
     public static String getTypeName(Class clazz){
-        Annotation[] annotationArr = clazz.getAnnotations();
-        String typeName = null;
-        for (Annotation annotation : annotationArr){
-            if (annotation instanceof Document) {
-                typeName = ((Document) annotation).type();
-                break;
-            }
-        }
-        return typeName;
+       return ((Document) clazz.getAnnotation(Document.class)).type();
     }
 
     /*判别一个类是否是Document（elasticsearch实体类）*/
     public static boolean isDocument(Class clazz) {
-        return getIndexName(clazz) == null ? false : true;
+        return clazz.isAnnotationPresent(Document.class);
+//        return getIndexName(clazz) == null ? false : true;
     }
 
     /*获取指定实体类所在索引的number_of_shards值*/
     public static short getShards(Class clazz){
-        Annotation[] annotationArr = clazz.getAnnotations();
-        short number_of_shards = 0;
-        for (Annotation annotation : annotationArr){
-            if (annotation instanceof Document) {
-                number_of_shards = ((Document) annotation).shards();
-                break;
-            }
-        }
-        return number_of_shards;
+        return ((Document) clazz.getAnnotation(Document.class)).shards();
     }
 
     /*获取指定实体类所在索引的number_of_replicas值*/
     public static short getReplicas(Class clazz){
-        Annotation[] annotationArr = clazz.getAnnotations();
-        short number_of_replicas = 0;
-        for (Annotation annotation : annotationArr){
-            if (annotation instanceof Document) {
-                number_of_replicas = ((Document) annotation).replicas();
-                break;
-            }
-        }
-        return number_of_replicas;
+        return ((Document) clazz.getAnnotation(Document.class)).replicas();
     }
 
     /*获取注解ID标志的字段名称*/
@@ -102,14 +90,22 @@ public class SearchUtil {
         java.lang.reflect.Field[] fields = clazz.getDeclaredFields();
         String id = null;
         outer: for (java.lang.reflect.Field field : fields) {
-            Annotation[] ans = field.getAnnotations();
-            for (Annotation a : ans) {
-                if (a instanceof ID) {
-                    id = field.getName();
-                    break outer;
-                }
+            if(field.isAnnotationPresent(ID.class)) {
+              //OR
+//            if(field.getAnnotation(ID.class) != null){
+                id = field.getName();
+                break outer;
             }
+//         OR
+//            Annotation[] ans = field.getAnnotations();
+//            for (Annotation a : ans) {
+//                if (a instanceof ID) {
+//                    id = field.getName();
+//                    break outer;
+//                }
+//            }
         }
+//        System.err.println("id:"+id);
         return id;
     }
 
@@ -137,30 +133,29 @@ public class SearchUtil {
         java.lang.reflect.Field[] fields = clzz.getDeclaredFields();
         for (java.lang.reflect.Field field : fields){
             String fieldName = field.getName();
-            Annotation[] ans = field.getAnnotations();
-            for (Annotation a : ans){
-                if (a instanceof Field) {
-                    String firstLetter=fieldName.substring(0, 1).toUpperCase();
-                    String getMethodName="get"+firstLetter+fieldName.substring(1);
-                    //调用原对象的getXXX()方法
-                    Method method;
-                    Object value = null;
-                    try {
-                        method = clzz.getDeclaredMethod(getMethodName);
-                        value = method.invoke(model);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    if (value == null){
-                        value = "";
-                    }
-                    json += '\"' + fieldName + '\"' + ":" + '\"' + value + '\"' + ",";
-                    continue;
+//            if(field.getAnnotation(Field.class) != null){
+//            OR
+            if(field.isAnnotationPresent(org.cnfire.elasticsearch.annotations.Field.class)) {
+                String firstLetter=fieldName.substring(0, 1).toUpperCase();
+                String getMethodName="get"+firstLetter+fieldName.substring(1);
+                //调用原对象的getXXX()方法
+                Method method;
+                Object value = null;
+                try {
+                    method = clzz.getDeclaredMethod(getMethodName);
+                    value = method.invoke(model);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                if (value == null){
+                    value = "";
+                }
+                json += '\"' + fieldName + '\"' + ":" + '\"' + value + '\"' + ",";
             }
         }
         json = json.substring(0,json.length()-1);
         json += "}";
+//        System.err.println(json);
         return json;
     }
 
@@ -266,15 +261,7 @@ public class SearchUtil {
 
     /*获得指定实体类中的Type注解中的Init参数值*/
     public static boolean getInitValue(Class<?> modelClazz){
-        boolean init = true;
-        Annotation[] annotationArr = modelClazz.getAnnotations();
-        for (Annotation annotation : annotationArr){
-            if (annotation instanceof Document) {
-                init = ((Document) annotation).init();
-                break;
-            }
-        }
-        return init;
+        return ((Document) modelClazz.getAnnotation(Document.class)).init();
     }
 
     /**
@@ -436,7 +423,7 @@ public class SearchUtil {
                 Annotation[] ans = field.getAnnotations();
                 //判断是否是ESField字段
                 for (Annotation a : ans) {
-                    if (a instanceof Field) {
+                    if (a instanceof org.cnfire.elasticsearch.annotations.Field) {
                         JSONObject fieldJson = new JSONObject();
                         fieldsStr += field.getName() + ",";
                         break;
@@ -459,29 +446,24 @@ public class SearchUtil {
         String fieldsStr = "[";
         JSONObject propertiesJson = new JSONObject();
         for (java.lang.reflect.Field field : fields) {
-//                System.out.println(field.getName());
-            Annotation[] ans = field.getAnnotations();
-            //判断是否是ESField字段
-            for (Annotation a : ans) {
-                if (a instanceof Field) {
-                    JSONObject fieldJson = new JSONObject();
-                    fieldsStr += field.getName() + ",";
-                    Field ann = (Field) a;
-                    Object type = ann.type().name().toLowerCase();
-                    String index = ann.index().name();
-                    String stored = ann.stored() + "";
-                    String analyzer = ann.analyzer();
-                    //type = "string", index = "analyzed", stored = "true", analyzer = "standard"
-                    if(type.equals("Auto")){//如果是Auto类型则跳过，不进行mapping设置
-                        continue;
-                    }
-                    fieldJson.put("type",type);
-                    fieldJson.put("index",index);
-                    fieldJson.put("stored",stored);
-                    fieldJson.put("analyzer",analyzer);
-                    propertiesJson.put(field.getName(),fieldJson);
-                    break;
+            if(field.isAnnotationPresent(org.cnfire.elasticsearch.annotations.Field.class)) {
+                JSONObject fieldJson = new JSONObject();
+                fieldsStr += field.getName() + ",";
+                org.cnfire.elasticsearch.annotations.Field ann =
+                        field.getAnnotation(org.cnfire.elasticsearch.annotations.Field.class);
+                Object type = ann.type().name().toLowerCase();
+                String index = ann.index().name();
+                String stored = ann.stored() + "";
+                String analyzer = ann.analyzer();
+                //type = "string", index = "analyzed", stored = "true", analyzer = "standard"
+                if(type.equals("Auto")){//如果是Auto类型则跳过，不进行mapping设置
+                    continue;
                 }
+                fieldJson.put("type",type);
+                fieldJson.put("index",index);
+                fieldJson.put("stored",stored);
+                fieldJson.put("analyzer",analyzer);
+                propertiesJson.put(field.getName(),fieldJson);
             }
         }
         typeJson.put("properties",propertiesJson);
@@ -497,14 +479,7 @@ public class SearchUtil {
         Set<Class<?>> classes = ClassUtil.scanPackage(Constant.MODELS_PACKAGE);
         JSONObject rootJson = new JSONObject();
         for (Class<?> clazz : classes) {
-            boolean init = true;
-            Annotation[] annotationArr = clazz.getAnnotations();
-            for (Annotation annotation : annotationArr){
-                if (annotation instanceof Document) {
-                    init = ((Document) annotation).init();
-                    break;
-                }
-            }
+            boolean init = ((Document) clazz.getAnnotation(Document.class)).init();
             if (!init) continue;
             JSONObject typeJson = new JSONObject();
             String indexName = SearchUtil.getIndexName(clazz);
@@ -514,26 +489,21 @@ public class SearchUtil {
             String fieldsStr = "[";
             JSONObject propertiesJson = new JSONObject();
             for (java.lang.reflect.Field field : fields) {
-//                System.out.println(field.getName());
-                Annotation[] ans = field.getAnnotations();
-                //判断是否是ESField字段
-                for (Annotation a : ans) {
-                    if (a instanceof Field) {
-                        JSONObject fieldJson = new JSONObject();
-                        fieldsStr += field.getName() + ",";
-                        Field ann = (Field) a;
-                        String type = ann.type().name();
-                        String index = ann.index().name();
-                        String stored = ann.stored()+"";
-                        String analyzer = ann.analyzer();
-                        //type = "string", index = "analyzed", stored = "true", analyzer = "standard"
-                        fieldJson.put("type",type);
-                        fieldJson.put("index",index);
-                        fieldJson.put("stored",stored);
-                        fieldJson.put("analyzer",analyzer);
-                        propertiesJson.put(field.getName(),fieldJson);
-                        break;
-                    }
+                if(field.isAnnotationPresent(org.cnfire.elasticsearch.annotations.Field.class)) {
+                    org.cnfire.elasticsearch.annotations.Field ann =
+                            field.getAnnotation(org.cnfire.elasticsearch.annotations.Field.class);
+                    JSONObject fieldJson = new JSONObject();
+                    fieldsStr += field.getName() + ",";
+                    String type = ann.type().name();
+                    String index = ann.index().name();
+                    String stored = ann.stored()+"";
+                    String analyzer = ann.analyzer();
+                    //type = "string", index = "analyzed", stored = "true", analyzer = "standard"
+                    fieldJson.put("type",type);
+                    fieldJson.put("index",index);
+                    fieldJson.put("stored",stored);
+                    fieldJson.put("analyzer",analyzer);
+                    propertiesJson.put(field.getName(),fieldJson);
                 }
             }
             typeJson.put("properties",propertiesJson);

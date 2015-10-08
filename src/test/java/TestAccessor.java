@@ -17,7 +17,7 @@ public class TestAccessor {
     /*添加单个对象*/
     @Test public boolean add(){
         Student model = new Student();
-        model.setId("1001");
+        model.setId("1002");
         model.setName("jack");
         model.setAge(30);
         model.setSex("male");
@@ -122,7 +122,7 @@ public class TestAccessor {
     /*根据实体类*/
     public static void main(String[] args) {
         TestAccessor example = new TestAccessor();
-//        example.add();
+        example.add();
 //        example.get();
 //        example.count();
         example.search();
